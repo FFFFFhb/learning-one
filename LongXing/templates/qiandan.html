@@ -1,0 +1,70 @@
+{% extends 'basetwo.html' %}
+{% load staticfiles %}
+{% block title %}欠款单 - 龙兴大连鲍{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+{% endblock %}
+{% block custom_js %}{% endblock %}
+{% block content %}
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+        <iframe id="suibian" name="suibian" src="" frameborder="0" style="display: none;"></iframe>
+        <form class="form-horizontal" id="" autocomplete="off" method="post"
+              enctype="multipart/form-data"
+              action="{% url 'datatables:datatables_adddebt' %}">
+            <h1>欠款单</h1>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">日&nbsp;&nbsp;期</th>
+                            <th class="text-center">客&nbsp;户&nbsp;名</th>
+                            <th class="text-center">金&nbsp;&nbsp;额（元）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input name="date1" class="form-control" type="date"></td>
+                            <td>
+                                <input name="customer1" class="form-control" type="text">
+                            </td>
+                            <td>
+                                <input name="money1" class="form-control" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><input name="date2" class="form-control" type="date"></td>
+                            <td>
+                                <input name="customer2" class="form-control" type="text">
+                            </td>
+                            <td>
+                                <input name="money2" class="form-control" type="number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><input name="date3" class="form-control" type="date"></td>
+                            <td>
+                                <input name="customer3" class="form-control" type="text">
+                            </td>
+                            <td>
+                                <input name="money3" class="form-control" type="number">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <button type="button" class="btn btn-lg btn-danger"
+                         onclick="resetvalue();">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <button class="btn btn-lg btn-primary" type="submit">保存</button>
+            </p>
+            {% csrf_token %}
+        </form>
+        </div>
+{% endblock %}

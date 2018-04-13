@@ -1,0 +1,59 @@
+{% extends 'baseone.html' %}
+{% load staticfiles %}
+{% block title %}高级 - 欠款表 - 龙兴大连鲍{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <h1>欠款表</h1>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>共{{ count_debt }}条记录</th>
+                            <th class="text-center">日&nbsp;&nbsp;期</th>
+                            <th class="text-center">客&nbsp;户&nbsp;名</th>
+                            <th class="text-center">金&nbsp;&nbsp;额（元）</th>
+                            <th class="text-center">删除记录</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for debt in all_debt %}
+                        <tr>
+                            <td>3{{ debt.id }}</td>
+                            <td>{{ debt.add_time }}</td>
+                            <td>{{ debt.who }}
+                            </td>
+                            <td>
+                                {{ debt.money }}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-xs btn-danger" style="padding:5px 10px;font-size:12px;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+
+                            <td>总</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>共<b>{{ total_money }}</b>元</td>
+                            <td>
+                                -
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+{% endblock %}
+{% block custom_js %}{% endblock %}
+
+

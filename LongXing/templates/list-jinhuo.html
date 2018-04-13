@@ -1,0 +1,77 @@
+{% extends 'baseone.html' %}
+{% load staticfiles %}
+{% block title %}进货表 - 龙兴大连鲍{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <h1>进货表</h1>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th class="text-center">共{{ count_purchase }}条记录</th>
+                            <th class="text-center">日&nbsp;&nbsp;期</th>
+                            <th class="text-center">货&nbsp;主&nbsp;名</th>
+                            <th class="text-center">规&nbsp;格（头）</th>
+                            <th class="text-center">件&nbsp;数</th>
+                            <th class="text-center">数&nbsp;量（斤）</th>
+                            <th class="text-center">单&nbsp;价（元/斤）</th>
+                            <th class="text-center">金&nbsp;&nbsp;额</th>
+                            <th>-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for purchase in all_purchase %}
+                        <tr>
+                            <td>3{{ purchase.purchasedata.id }}</td>
+                            <td>{{ purchase.purchasedata.add_time }}</td>
+                            <td>
+                                {{ purchase.purchasedata.owner }}
+                            </td>
+                            <td>{{ purchase.size }}
+                            </td>
+                            <td>
+                                {{ purchase.amount }}
+                            </td>
+                            <td>
+                                {{ purchase.kilo }}
+                            </td>
+                            <td>
+                                {{ purchase.price }}
+                            </td>
+                            <td>{{ purchase.totalprice }}</td>
+                            <td>
+                                <button type="button" class="btn btn-xs btn-danger" style="padding:5px 10px;font-size:12px;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+
+                            <td>总</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>共<b>{{ total_number }}</b>件</td>
+                            <td>共<b>{{ total_kilo }}</b>斤</td>
+                            <td>-</td>
+                            <td>共<b>{{ total_price }}</b>元</td>
+                            <td>
+                                -
+                            </td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+{% endblock %}
+{% block custom_js %}{% endblock %}
+

@@ -1,0 +1,231 @@
+{% extends 'basetwo.html' %}
+{% load staticfiles %}
+{% block title %}进货单 - 龙兴大连鲍{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+{% endblock %}
+{% block custom_js %}{% endblock %}
+{% block content %}
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <iframe id="suibian" name="suibian" src="" frameborder="0" style="display: none;"></iframe>
+        <form class="form-horizontal" id="" autocomplete="off" method="post"
+              enctype="multipart/form-data"
+              action="{% url 'datatables:datatables_addjinhuo' %}">
+            <h1>进货单</h1>
+            <hr>
+            <div class="table-responsive">
+
+                <label for="date" class="col-sm-2 control-label">日&nbsp;期:</label>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" id="date"
+                           name="date" value="">
+                </div>
+                <label for="customer" class="col-sm-2 control-label">货&nbsp;主:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="customer" placeholder="填写货主名"
+                           name="customer" value="">
+                </div>
+
+                <table class="table table-striped ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="text-center">规格（头）</th>
+                        <th class="text-center">件&nbsp;&nbsp;数</th>
+                        <th class="text-center">斤&nbsp;&nbsp;数</th>
+                        <th class="text-center">单价（元/斤）</th>
+                        <th class="text-center">金&nbsp;&nbsp;额（元）</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><b name="dataid1">1</b></td>
+                        <td><select id="size1" name="size1" class="form-control">
+                            <option>3-5</option>
+                            <option>5-7</option>
+                            <option>8-10</option>
+                            <option>11-12</option>
+                            <option>13-15</option>
+                            <option>16-18</option>
+                            <option>19-23</option>
+                            <option>23-25</option>
+                            <option>25-30</option>
+                            <option>30-35</option>
+                            <option>35-40</option>
+                        </select></td>
+                        <td>
+                            <input id="number1" name="number1" class="form-control" type="number" value=0
+                                   onkeyup="countnumber();">
+                        </td>
+                        <td><input id="kilo1" name="kilo1" class="form-control" type="number" value=0
+                                   onkeyup="jisuan();totalcount();"></td>
+                        <td><input id="price1" name="price1" class="form-control" type="number" value=0
+                                   onkeyup="jisuan();totalcount();">
+                        </td>
+                        <td><input id="totalprice1" name="totalprice1" type="text" class="form-control" readonly></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td name="dataid2">2</td>
+                        <td>
+                            <select name="size2" class="form-control">
+                                <option>3-5</option>
+                                <option>5-7</option>
+                                <option>8-10</option>
+                                <option>11-12</option>
+                                <option>13-15</option>
+                                <option>16-18</option>
+                                <option>19-23</option>
+                                <option>23-25</option>
+                                <option>25-30</option>
+                                <option>30-35</option>
+                                <option>35-40</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="number2" name="number2" class="form-control" type="number" value=0
+                                   onkeyup="countnumber();">
+                        </td>
+                        <td>
+                            <input id="kilo2" name="kilo2" type="number" class="form-control" value=0
+                                   onkeyup="jisuan2();totalcount();">
+                        </td>
+                        <td>
+                            <input id="price2" name="price2" class="form-control" type="number" value=0
+                                   onkeyup="jisuan2();totalcount();">
+                        </td>
+                        <td><input id="totalprice2" name="totalprice2" type="text" class="form-control" readonly></td>
+
+                    </tr>
+
+                    <tr>
+                        <td name="dataid3">3</td>
+                        <td>
+                            <select name="size3" class="form-control">
+                                <option>3-5</option>
+                                <option>5-7</option>
+                                <option>8-10</option>
+                                <option>11-12</option>
+                                <option>13-15</option>
+                                <option>16-18</option>
+                                <option>19-23</option>
+                                <option>23-25</option>
+                                <option>25-30</option>
+                                <option>30-35</option>
+                                <option>35-40</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="number3" name="number3" class="form-control" type="number" value=0
+                                   onkeyup="countnumber();">
+                        </td>
+                        <td>
+                            <input id="kilo3" name="kilo3" type="number" class="form-control" value=0
+                                   onkeyup="jisuan3();totalcount();">
+                        </td>
+                        <td>
+                            <input id="price3" name="price3" class="form-control" type="number" value=0
+                                   onkeyup="jisuan3();totalcount();">
+                        </td>
+                        <td><input id="totalprice3" name="totalprice3" type="number" class="form-control" readonly></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td name="dataid4">4</td>
+                        <td>
+                            <select name="size4" class="form-control">
+                                <option>3-5</option>
+                                <option>5-7</option>
+                                <option>8-10</option>
+                                <option>11-12</option>
+                                <option>13-15</option>
+                                <option>16-18</option>
+                                <option>19-23</option>
+                                <option>23-25</option>
+                                <option>25-30</option>
+                                <option>30-35</option>
+                                <option>35-40</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="number4" name="number4" class="form-control" type="number" value=0
+                                   onkeyup="countnumber();">
+                        </td>
+                        <td>
+                            <input id="kilo4" name="kilo4" type="number" class="form-control" value=0
+                                   onkeyup="jisuan4();totalcount();">
+                        </td>
+                        <td>
+                            <input id="price4" name="price4" class="form-control" type="number" value=0
+                                   onkeyup="jisuan4();totalcount();">
+                        </td>
+                        <td><input id="totalprice4" name="totalprice4" type="number" class="form-control" readonly></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td name="dataid5">5</td>
+                        <td>
+                            <select name="size5" class="form-control">
+                                <option>3-5</option>
+                                <option>5-7</option>
+                                <option>8-10</option>
+                                <option>11-12</option>
+                                <option>13-15</option>
+                                <option>16-18</option>
+                                <option>19-23</option>
+                                <option>23-25</option>
+                                <option>25-30</option>
+                                <option>30-35</option>
+                                <option>35-40</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="number5" name="number5" class="form-control" type="number" value=0
+                                   onkeyup="countnumber();">
+                        </td>
+                        <td>
+                            <input id="kilo5" name="kilo5" type="number" class="form-control" value=0
+                                   onkeyup="jisuan5();totalcount();">
+                        </td>
+                        <td>
+                            <input id="price5" name="price5" class="form-control" type="number" value=0
+                                   onkeyup="jisuan5();totalcount();">
+                        </td>
+                        <td><input id="totalprice5" name="totalprice5" type="number" class="form-control" readonly></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>总</td>
+                        <td>-</td>
+                        <td>共<span id="totalnumber"></span>件</td>
+                        <td>共<span id="totalkilo"></span>斤</td>
+                        <td>-</td>
+                        <td>共<span id="totalprice"></span>元</td>
+                        <td>
+                            -
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <button type="button" class="btn btn-lg btn-danger"
+                         onclick="resetvalue();">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <button class="btn btn-lg btn-primary" type="submit">保存</button>
+            </p>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

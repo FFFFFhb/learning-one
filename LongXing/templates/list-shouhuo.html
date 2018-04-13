@@ -1,0 +1,74 @@
+{% extends 'baseone.html' %}
+{% load staticfiles %}
+{% block title %}售货表 - 龙兴大连鲍{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- Main component for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <h1>售货表</h1>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th class="text-center">共{{ count_sell }}条记录</th>
+                            <th class="text-center">日&nbsp;&nbsp;期</th>
+                            <th class="text-center">客&nbsp;户&nbsp;名</th>
+                            <th class="text-center">规&nbsp;格（头）</th>
+                            <th class="text-center">数&nbsp;量（斤）</th>
+                            <th class="text-center">单&nbsp;价（元/斤）</th>
+                            <th class="text-center">金&nbsp;&nbsp;额</th>
+                            <th class="text-center">是否欠账</th>
+                            <th>-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sell in all_sell %}
+                        <tr>
+                            <td>3{{ sell.datatable.id }}</td>
+                            <td>{{ sell.datatable.add_time }}</td>
+                            <td>
+                                {{ sell.datatable.customer }}
+                            </td>
+                            <td>{{ sell.size }}
+                            </td>
+                            <td>
+                                {{ sell.kilo }}
+                            </td>
+                            <td>
+                                {{ sell.price }}
+                            </td>
+                            <td>{{ sell.totalprice }}</td>
+                            <td>{{ sell.debts }}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-xs btn-danger" style="padding:5px 10px;font-size:12px;">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>-</td>
+                            <td>总</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>共<b>{{ total_kilo }}</b>斤</td>
+                            <td>-</td>
+                            <td>共<b>{{ total_price }}</b>元</td>
+                            <td>
+                                -
+                            </td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block custom_css %}
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+{% endblock %}
+{% block custom_js %}{% endblock %}
+

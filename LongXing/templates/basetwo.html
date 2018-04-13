@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{% block title %}售货单 - 龙兴大连鲍{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/navbar-fixed-top.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/justified-nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/longxingbase.css' %}">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="{% static 'js/longxingbase.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+{% block custom_css %}{% endblock %}
+{% block custom_js %}{% endblock %}
+</head>
+
+<body style="min-height: 2000px;padding-top:70px;">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">龙兴大连鲍</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'visitor:visitor_home' %}">主页</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'datatables:datatables_selllist' %}">售货</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'datatables:datatables_purchaselist' %}">进货</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'datatables:datatables_spendinglist' %}">档口开支</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">高级
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'datatables:datatables_huirulist' %}">汇入表</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'datatables:datatables_huichulist' %}">汇出表</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'datatables:datatables_qiandanlist' %}">欠款表</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="{% url 'datatables:datatables_addsell' %}">管理员</a>
+                    </li>
+                    <li><a href="{% url 'logout' %}">退出</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="masthead">
+            <h3 class="text-muted">管理员</h3>
+            <nav>
+                <ul class="nav nav-justified">
+                    <li {% if request.path|slice:'19' == '/datatables/addsell' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_addsell' %}">售货单</a>
+                    </li>
+                    <li {% if request.path|slice:'21' == '/datatables/addjinhuo' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_addjinhuo' %}">进货单</a>
+                    </li>
+                    <li {% if request.path|slice:'21' == '/datatables/addhuichu' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_addhuichu' %}">汇出表</a>
+                    </li>
+                    <li {% if request.path|slice:'20' == '/datatables/addhuiru' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_addhuiru' %}">汇入表</a>
+                    </li>
+                    <li {% if request.path|slice:'22' == '/datatables/adddangkou' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_adddangkoukaizhi' %}">档口开支</a>
+                    </li>
+                    <li {% if request.path|slice:'19' == '/datatables/adddebt' %}class="active"{% endif %}>
+                        <a href="{% url 'datatables:datatables_adddebt' %}">欠款单</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Main component for a primary marketing message or call to action -->
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+</html>
